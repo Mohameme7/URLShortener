@@ -13,9 +13,15 @@ btn.addEventListener('click', () => {
   xhr.responseType = 'json'
 
   xhr.onload = () => {
-    const data = xhr.response
-    document.getElementById('linkarea').value = data.newurl;
+    const statuscode = xhr.status
+    console.log(statuscode);
+    if (statuscode == "200" ) {
+    document.getElementById('linkarea').value = xhr.response.newurl;
+    } 
+    else if (statuscode == "400") {
+      document.getElementById('linkarea').value = "Invalid URL Inserted.";
 
+    }
   }
 
   let data = {

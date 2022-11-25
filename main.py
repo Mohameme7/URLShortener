@@ -1,12 +1,12 @@
 import random
 import sqlite3, flask
 import string
-from flask_cors import CORS
+#from flask_cors import CORS
 from flask import request, redirect
 import validators
 app = flask.Flask(__name__, template_folder="templates", static_folder='static_files')
 app.secret_key = "eererea"
-CORS(app)
+#CORS(app)
 connection = sqlite3.connect('database.db', check_same_thread=False)
 c = connection.cursor()
 def randomword():
@@ -20,9 +20,8 @@ def createcode():
             urlredirectedto = f"https://{urlredirectedto}"
 
         if not bool(validators.url(urlredirectedto)):
-            return "Bad Url"
+            return "Bad Url", 400
         elif bool(validators.url(urlredirectedto)):
-            print(bool(validators.url(urlredirectedto)))
             code = randomword()
             c.execute('INSERT INTO urls values(?,?);', (code, urlredirectedto))
             connection.commit()
