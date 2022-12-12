@@ -25,6 +25,7 @@ def createcode():
             code = randomword()
             c.execute('INSERT INTO urls values(?,?);', (code, urlredirectedto))
             connection.commit()
+         ..
             return {"newurl" : f"http://127.0.0.1:5000/shortened?code={code}"}, 200
 
     except Exception:
